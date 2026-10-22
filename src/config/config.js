@@ -8,7 +8,7 @@ module.exports = {
     host: process.env.DB_HOST || "127.0.0.1",
     port: process.env.DB_PORT || 3306,
     dialect: process.env.DB_DIALECT || "sqlite",
-    storage: process.env.DB_DIALECT === "sqlite" || !process.env.DB_DIALECT ? "./src/data/Db_app.db" : undefined
+    storage: process.env.DB_STORAGE || "./src/data/Db_app.db"
   },
   test: {
     username: "root",
