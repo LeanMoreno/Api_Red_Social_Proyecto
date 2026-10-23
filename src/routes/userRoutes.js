@@ -13,6 +13,18 @@ router.get(
   buscarUsuarioPorId,
   userControllers.obtenerUsuario,
 );
+
 router.post("/", validarUsuario, userControllers.crearUsuario);
 
+router.put(
+  "/:id",
+  validarId,
+  buscarUsuarioPorId,
+  userControllers.actualizarUsuario,
+);
+/*
+router.patch("/:id", usuariosControllers.modificarUsuario);
+
+router.delete("/:id", usuariosControllers.eliminarUsuario);
+*/
 module.exports = router;

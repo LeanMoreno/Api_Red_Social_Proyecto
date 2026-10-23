@@ -4,7 +4,7 @@ const buscarUsuarioPorId = async (req, res, next) => {
   try {
     const { id } = req.params;
     const usuario = await User.findByPk(id, {
-      attributes: ["nickName"],
+      attributes: ["id", "nickName"],
     });
     if (!usuario) {
       return res.status(404).json({ message: "Usuario no encontrado" });

@@ -2,7 +2,9 @@ const { User } = require("../models");
 
 const obtenerUsuarios = async (req, res) => {
   try {
-    const usuarios = await User.findAll();
+    const usuarios = await User.findAll({
+      attributes: ["id", "nickName"],
+    });
     res.status(200).json(usuarios);
   } catch (error) {
     console.error(error);
@@ -29,8 +31,29 @@ const crearUsuario = async (req, res) => {
   }
 };
 
+const actualizarUsuario = async (req, res) => {
+  try {
+    const usuario = req.usuario;
+    const { nickName } = req.body;
+
+    await usuario.update({
+      nickName,
+    });
+
+    res
+      .status(200)
+      .json({ message: "Usuario actualizado con exito!!!", usuario });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Error al actualizar el producto",
+    });
+  }
+};
+
 module.exports = {
   obtenerUsuarios,
   obtenerUsuario,
   crearUsuario,
+  actualizarUsuario,
 };

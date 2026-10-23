@@ -1,10 +1,14 @@
+const { idSchema } = require("../schemas/userSchemas");
+
 const validarId = (req, res, next) => {
   const { id } = req.params;
   const idNumero = Number(id);
-  if (!Number.isInteger(idNumero) || idNumero < 0) {
+  const { error } = idSchema.validate(idNumero);
+
+  if (error) {
     return res
       .status(400)
-      .json({ message: "El id debe ser entero y positivo." });
+      .json({ message: "Datos invalidos", error: error.details[0].message });
   }
   next();
 };
