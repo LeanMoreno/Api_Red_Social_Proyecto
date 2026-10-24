@@ -51,9 +51,46 @@ const actualizarUsuario = async (req, res) => {
   }
 };
 
+const modificarUsuario = async (req, res) => {
+  try {
+    const usuario = req.usuario;
+
+    usuario.nickName = req.body.nickName;
+
+    await usuario.save();
+
+    res.status(200).json({
+      message: "Usuario modificado con éxito",
+      usuario,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al modificar el usuario",
+    });
+  }
+};
+const eliminarUsuario = async (req, res) => {
+  try {
+    const usuario = req.usuario;
+
+    await usuario.destroy();
+
+    res.status(200).json({
+      message: "Usuario eliminado con éxito",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Error al eliminar el usuario",
+    });
+  }
+};
+
 module.exports = {
   obtenerUsuarios,
   obtenerUsuario,
   crearUsuario,
   actualizarUsuario,
+  modificarUsuario,
+  eliminarUsuario,
 };

@@ -22,9 +22,15 @@ router.put(
   buscarUsuarioPorId,
   userControllers.actualizarUsuario,
 );
-/*
-router.patch("/:id", usuariosControllers.modificarUsuario);
 
-router.delete("/:id", usuariosControllers.eliminarUsuario);
-*/
+router.patch("/:id", 
+validarId,
+buscarUsuarioPorId,
+userControllers.modificarUsuario);
+
+router.delete("/:id", 
+  validarId,
+buscarUsuarioPorId,
+userControllers.eliminarUsuario);
+
 module.exports = router;

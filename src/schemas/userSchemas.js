@@ -10,9 +10,9 @@ const usuarioSchema = Joi.object({
 });
 
 const idSchema = Joi.number().integer().min(1).required().messages({
-  "number.base": "El precio debe ser un número",
-  "number.min": "El precio no puede ser negativo",
-  "any.required": "El precio es obligatorio",
+  "number.base": "El id usuario debe ser un número",
+  "number.min": "El id usuario no puede ser negativo",
+  "any.required": "El id usuario es obligatorio",
 });
 
 module.exports = {

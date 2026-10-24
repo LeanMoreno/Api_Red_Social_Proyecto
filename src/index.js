@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
 const routerUsuarios = require("./routes/userRoutes");
-
+const routerPosts = require("./routes/postRoutes");
 const db = require("./models");
 
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use("/posts", routerPosts);
 app.use("/usuarios", routerUsuarios);
 
 app.listen(PORT, async () => {
