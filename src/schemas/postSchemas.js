@@ -6,13 +6,11 @@ const postSchema = Joi.object({
     "string.min": "la descripcion debe tener al menos 3 caracteres",
     "string.max": "la descripcion no puede superar los 500 caracteres",
     "any.required": "la descripcion es obligatoria",
-
-    idUser : Joi.number().integer().positive().required().messages({
-      "number.base": "El id usuario debe ser un número",
-      "number.positive": "El id usuario no puede ser negativo",
-      "any.required": "El id usuario es obligatorio",
-    })
-    
+  }),
+  userId: Joi.number().integer().positive().required().messages({
+    "number.base": "El id usuario debe ser un número",
+    "number.positive": "El id usuario no puede ser negativo",
+    "any.required": "El id usuario es obligatorio",
   }),
 });
 
