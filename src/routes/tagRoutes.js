@@ -9,7 +9,7 @@ router.get("/", tagControllers.obtenerTags);
 
 router.get("/:id", validarIdTag, buscarTagPorId, tagControllers.obtenerTag);
 router.get(
-  "/:id/posts",
+  "/:id/posts/",
   validarIdTag,
   buscarTagPorId,
   tagControllers.obtenerPostsPorTag,

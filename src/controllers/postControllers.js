@@ -1,7 +1,7 @@
-const { Post } = require("../models");
+const { User, Post } = require("../models");
 
 const obtenerPosts = async (req, res) => {
-  const posts = await Post.findAll();
+  const posts = await Post.findAll({});
   res.json(posts);
 };
 
@@ -10,14 +10,21 @@ const obtenerPost = async (req, res) => {
 };
 
 const crearPost = async (req, res) => {
-  const { descripcion, userId } = req.body;
+  try {
+    const { descripcion, userId } = req.body;
+    const usuario = User.findByPk(userId);
 
-  const post = await Post.create({
-    descripcion,
-    userId,
-  });
+    if (!usuario) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
 
-  res.status(201).json(post);
+    const post = await Post.create({
+      descripcion,
+      userId,
+    });
+
+    res.status(201).json(post);
+  } catch (error) {}
 };
 
 const actualizarPost = async (req, res) => {
@@ -48,12 +55,11 @@ const eliminarPost = async (req, res) => {
   });
 };
 
-module.exports ={
+module.exports = {
   obtenerPosts,
   obtenerPost,
   crearPost,
   actualizarPost,
   modificarPost,
   eliminarPost,
-  
 };
