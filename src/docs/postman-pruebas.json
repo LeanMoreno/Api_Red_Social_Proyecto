@@ -1,0 +1,581 @@
+[
+  {
+    "nombre": "Obtener todos los usuarios",
+    "metodo": "GET",
+    "ruta": "/usuarios",
+    "body": null
+  },
+  {
+    "nombre": "Obtener usuario por ID - Éxito",
+    "metodo": "GET",
+    "ruta": "/usuarios/:id",
+    "body": null
+  },
+  {
+    "nombre": "Obtener usuario por ID - Error 400 (ID inválido o no numérico)",
+    "metodo": "GET",
+    "ruta": "/usuarios/:id",
+    "body": null
+  },
+  {
+    "nombre": "Obtener usuario por ID - Error 404 (Usuario inexistente)",
+    "metodo": "GET",
+    "ruta": "/usuarios/:id",
+    "body": null
+  },
+  {
+    "nombre": "Crear usuario - Éxito",
+    "metodo": "POST",
+    "ruta": "/usuarios",
+    "body": {
+      "nickName": "TomasProg"
+    }
+  },
+  {
+    "nombre": "Crear usuario - Error 400 (nickName ausente o vacío)",
+    "metodo": "POST",
+    "ruta": "/usuarios",
+    "body": {
+      "nickName": ""
+    }
+  },
+  {
+    "nombre": "Crear usuario - Error 400 (nickName menor a 3 caracteres)",
+    "metodo": "POST",
+    "ruta": "/usuarios",
+    "body": {
+      "nickName": "ab"
+    }
+  },
+  {
+    "nombre": "Crear usuario - Error 400 (nickName mayor a 100 caracteres)",
+    "metodo": "POST",
+    "ruta": "/usuarios",
+    "body": {
+      "nickName": "usuarioConNombreExtremadamenteLargoQueSuperaLosCienCaracteresPermitidosPorElEsquemaDeValidacionDeJoi123456789"
+    }
+  },
+  {
+    "nombre": "Crear usuario - Error 409 (nickName ya en uso)",
+    "metodo": "POST",
+    "ruta": "/usuarios",
+    "body": {
+      "nickName": "TomasProg"
+    }
+  },
+  {
+    "nombre": "Actualizar usuario (PUT) - Éxito",
+    "metodo": "PUT",
+    "ruta": "/usuarios/:id",
+    "body": {
+      "nickName": "TomasModificado"
+    }
+  },
+  {
+    "nombre": "Actualizar usuario (PUT) - Error 400 (nickName menor a 3 caracteres)",
+    "metodo": "PUT",
+    "ruta": "/usuarios/:id",
+    "body": {
+      "nickName": "ab"
+    }
+  },
+  {
+    "nombre": "Actualizar usuario (PUT) - Error 404 (Usuario inexistente)",
+    "metodo": "PUT",
+    "ruta": "/usuarios/:id",
+    "body": {
+      "nickName": "TomasNuevo"
+    }
+  },
+  {
+    "nombre": "Modificar usuario (PATCH) - Éxito",
+    "metodo": "PATCH",
+    "ruta": "/usuarios/:id",
+    "body": {
+      "nickName": "TomasParche"
+    }
+  },
+  {
+    "nombre": "Modificar usuario (PATCH) - Error 404 (Usuario inexistente)",
+    "metodo": "PATCH",
+    "ruta": "/usuarios/:id",
+    "body": {
+      "nickName": "TomasParche"
+    }
+  },
+  {
+    "nombre": "Eliminar usuario - Éxito",
+    "metodo": "DELETE",
+    "ruta": "/usuarios/:id",
+    "body": null
+  },
+  {
+    "nombre": "Eliminar usuario - Error 400 (ID inválido)",
+    "metodo": "DELETE",
+    "ruta": "/usuarios/:id",
+    "body": null
+  },
+  {
+    "nombre": "Eliminar usuario - Error 404 (Usuario inexistente)",
+    "metodo": "DELETE",
+    "ruta": "/usuarios/:id",
+    "body": null
+  },
+  {
+    "nombre": "Obtener todos los posts",
+    "metodo": "GET",
+    "ruta": "/posts",
+    "body": null
+  },
+  {
+    "nombre": "Obtener post por ID - Éxito",
+    "metodo": "GET",
+    "ruta": "/posts/:id",
+    "body": null
+  },
+  {
+    "nombre": "Obtener post por ID - Error 400 (ID inválido o negativo)",
+    "metodo": "GET",
+    "ruta": "/posts/:id",
+    "body": null
+  },
+  {
+    "nombre": "Obtener post por ID - Error 404 (Post inexistente)",
+    "metodo": "GET",
+    "ruta": "/posts/:id",
+    "body": null
+  },
+  {
+    "nombre": "Crear post - Éxito",
+    "metodo": "POST",
+    "ruta": "/posts",
+    "body": {
+      "descripcion": "Publicación de prueba para la red anti-social.",
+      "userId": 1
+    }
+  },
+  {
+    "nombre": "Crear post - Error 400 (Descripción menor a 3 caracteres)",
+    "metodo": "POST",
+    "ruta": "/posts",
+    "body": {
+      "descripcion": "ab",
+      "userId": 1
+    }
+  },
+  {
+    "nombre": "Crear post - Error 400 (Campos obligatorios faltantes)",
+    "metodo": "POST",
+    "ruta": "/posts",
+    "body": {}
+  },
+  {
+    "nombre": "Crear post - Error 400 (userId negativo o inválido)",
+    "metodo": "POST",
+    "ruta": "/posts",
+    "body": {
+      "descripcion": "Publicación con ID de usuario inválido",
+      "userId": -1
+    }
+  },
+  {
+    "nombre": "Crear post - Error 404 (Usuario inexistente)",
+    "metodo": "POST",
+    "ruta": "/posts",
+    "body": {
+      "descripcion": "Publicación con usuario no registrado en base de datos",
+      "userId": 999
+    }
+  },
+  {
+    "nombre": "Actualizar post (PUT) - Éxito",
+    "metodo": "PUT",
+    "ruta": "/posts/:id",
+    "body": {
+      "descripcion": "Publicación actualizada mediante método PUT.",
+      "userId": 1
+    }
+  },
+  {
+    "nombre": "Actualizar post (PUT) - Error 400 (Descripción menor a 3 caracteres)",
+    "metodo": "PUT",
+    "ruta": "/posts/:id",
+    "body": {
+      "descripcion": "no",
+      "userId": 1
+    }
+  },
+  {
+    "nombre": "Actualizar post (PUT) - Error 404 (Post inexistente)",
+    "metodo": "PUT",
+    "ruta": "/posts/:id",
+    "body": {
+      "descripcion": "Publicación actualizada",
+      "userId": 1
+    }
+  },
+  {
+    "nombre": "Actualizar post (PUT) - Error 404 (Usuario inexistente)",
+    "metodo": "PUT",
+    "ruta": "/posts/:id",
+    "body": {
+      "descripcion": "Publicación actualizada",
+      "userId": 999
+    }
+  },
+  {
+    "nombre": "Modificar post (PATCH) - Éxito",
+    "metodo": "PATCH",
+    "ruta": "/posts/:id",
+    "body": {
+      "descripcion": "Descripción modificada parcialmente vía PATCH."
+    }
+  },
+  {
+    "nombre": "Modificar post (PATCH) - Error 404 (Post inexistente)",
+    "metodo": "PATCH",
+    "ruta": "/posts/:id",
+    "body": {
+      "descripcion": "Descripción modificada"
+    }
+  },
+  {
+    "nombre": "Eliminar post - Éxito",
+    "metodo": "DELETE",
+    "ruta": "/posts/:id",
+    "body": null
+  },
+  {
+    "nombre": "Eliminar post - Error 400 (ID inválido)",
+    "metodo": "DELETE",
+    "ruta": "/posts/:id",
+    "body": null
+  },
+  {
+    "nombre": "Eliminar post - Error 404 (Post inexistente)",
+    "metodo": "DELETE",
+    "ruta": "/posts/:id",
+    "body": null
+  },
+  {
+    "nombre": "Obtener todos los comentarios",
+    "metodo": "GET",
+    "ruta": "/comentarios",
+    "body": null
+  },
+  {
+    "nombre": "Obtener comentario por ID - Éxito",
+    "metodo": "GET",
+    "ruta": "/comentarios/:id",
+    "body": null
+  },
+  {
+    "nombre": "Obtener comentario por ID - Error 404 (Comentario inexistente)",
+    "metodo": "GET",
+    "ruta": "/comentarios/:id",
+    "body": null
+  },
+  {
+    "nombre": "Obtener comentarios de un post - Éxito",
+    "metodo": "GET",
+    "ruta": "/posts/:id/comentarios",
+    "body": null
+  },
+  {
+    "nombre": "Obtener comentarios de un post - Error 404 (Post inexistente)",
+    "metodo": "GET",
+    "ruta": "/posts/:id/comentarios",
+    "body": null
+  },
+  {
+    "nombre": "Crear comentario - Éxito",
+    "metodo": "POST",
+    "ruta": "/comentarios",
+    "body": {
+      "descripcion": "Excelente publicación, felicitaciones!",
+      "userId": 1,
+      "postId": 1
+    }
+  },
+  {
+    "nombre": "Crear comentario - Error 400 (Descripción requerida o vacía)",
+    "metodo": "POST",
+    "ruta": "/comentarios",
+    "body": {
+      "descripcion": "",
+      "userId": 1,
+      "postId": 1
+    }
+  },
+  {
+    "nombre": "Crear comentario - Error 400 (Faltan claves foráneas userId o postId)",
+    "metodo": "POST",
+    "ruta": "/comentarios",
+    "body": {
+      "descripcion": "Comentario sin relaciones"
+    }
+  },
+  {
+    "nombre": "Crear comentario - Error 404 (Usuario inexistente)",
+    "metodo": "POST",
+    "ruta": "/comentarios",
+    "body": {
+      "descripcion": "Comentario de prueba",
+      "userId": 999,
+      "postId": 1
+    }
+  },
+  {
+    "nombre": "Crear comentario - Error 404 (Post inexistente)",
+    "metodo": "POST",
+    "ruta": "/comentarios",
+    "body": {
+      "descripcion": "Comentario de prueba",
+      "userId": 1,
+      "postId": 999
+    }
+  },
+  {
+    "nombre": "Actualizar comentario (PUT) - Éxito",
+    "metodo": "PUT",
+    "ruta": "/comentarios/:id",
+    "body": {
+      "descripcion": "Comentario modificado mediante PUT.",
+      "userId": 1,
+      "postId": 1
+    }
+  },
+  {
+    "nombre": "Actualizar comentario (PUT) - Error 404 (Comentario inexistente)",
+    "metodo": "PUT",
+    "ruta": "/comentarios/:id",
+    "body": {
+      "descripcion": "Comentario modificado",
+      "userId": 1,
+      "postId": 1
+    }
+  },
+  {
+    "nombre": "Actualizar comentario (PUT) - Error 404 (Usuario o Post inexistente)",
+    "metodo": "PUT",
+    "ruta": "/comentarios/:id",
+    "body": {
+      "descripcion": "Comentario modificado",
+      "userId": 999,
+      "postId": 1
+    }
+  },
+  {
+    "nombre": "Eliminar comentario - Éxito",
+    "metodo": "DELETE",
+    "ruta": "/comentarios/:id",
+    "body": null
+  },
+  {
+    "nombre": "Eliminar comentario - Error 404 (Comentario inexistente)",
+    "metodo": "DELETE",
+    "ruta": "/comentarios/:id",
+    "body": null
+  },
+  {
+    "nombre": "Obtener todos los tags",
+    "metodo": "GET",
+    "ruta": "/tags",
+    "body": null
+  },
+  {
+    "nombre": "Obtener tag por ID - Éxito",
+    "metodo": "GET",
+    "ruta": "/tags/:id",
+    "body": null
+  },
+  {
+    "nombre": "Obtener tag por ID - Error 404 (Tag inexistente)",
+    "metodo": "GET",
+    "ruta": "/tags/:id",
+    "body": null
+  },
+  {
+    "nombre": "Obtener posts asociados a un tag - Éxito",
+    "metodo": "GET",
+    "ruta": "/tags/:id/posts",
+    "body": null
+  },
+  {
+    "nombre": "Obtener posts asociados a un tag - Error 404 (Tag inexistente)",
+    "metodo": "GET",
+    "ruta": "/tags/:id/posts",
+    "body": null
+  },
+  {
+    "nombre": "Crear tag - Éxito",
+    "metodo": "POST",
+    "ruta": "/tags",
+    "body": {
+      "nombre": "tecnologia"
+    }
+  },
+  {
+    "nombre": "Crear tag - Error 400 (Nombre vacío o ausente)",
+    "metodo": "POST",
+    "ruta": "/tags",
+    "body": {
+      "nombre": ""
+    }
+  },
+  {
+    "nombre": "Crear tag - Error 400 (Nombre mayor a 50 caracteres)",
+    "metodo": "POST",
+    "ruta": "/tags",
+    "body": {
+      "nombre": "nombreDeEtiquetaDemasiadoLargoQueSuperaLosCincuentaCaracteres"
+    }
+  },
+  {
+    "nombre": "Crear tag - Error 409 (Tag ya existente)",
+    "metodo": "POST",
+    "ruta": "/tags",
+    "body": {
+      "nombre": "tecnologia"
+    }
+  },
+  {
+    "nombre": "Actualizar tag (PUT) - Éxito",
+    "metodo": "PUT",
+    "ruta": "/tags/:id",
+    "body": {
+      "nombre": "programacion"
+    }
+  },
+  {
+    "nombre": "Actualizar tag (PUT) - Error 404 (Tag inexistente)",
+    "metodo": "PUT",
+    "ruta": "/tags/:id",
+    "body": {
+      "nombre": "programacion"
+    }
+  },
+  {
+    "nombre": "Eliminar tag - Éxito",
+    "metodo": "DELETE",
+    "ruta": "/tags/:id",
+    "body": null
+  },
+  {
+    "nombre": "Eliminar tag - Error 404 (Tag inexistente)",
+    "metodo": "DELETE",
+    "ruta": "/tags/:id",
+    "body": null
+  },
+  {
+    "nombre": "Asociar tag a post - Éxito",
+    "metodo": "POST",
+    "ruta": "/posts/:id/tags/:tagId",
+    "body": null
+  },
+  {
+    "nombre": "Asociar tag a post - Error 404 (Post o Tag inexistente)",
+    "metodo": "POST",
+    "ruta": "/posts/:id/tags/:tagId",
+    "body": null
+  },
+  {
+    "nombre": "Asociar tag a post - Error 409 (Tag ya asociado al post)",
+    "metodo": "POST",
+    "ruta": "/posts/:id/tags/:tagId",
+    "body": null
+  },
+  {
+    "nombre": "Desasociar tag de post - Éxito",
+    "metodo": "DELETE",
+    "ruta": "/posts/:id/tags/:tagId",
+    "body": null
+  },
+  {
+    "nombre": "Desasociar tag de post - Error 404 (El tag no está asociado al post)",
+    "metodo": "DELETE",
+    "ruta": "/posts/:id/tags/:tagId",
+    "body": null
+  },
+  {
+    "nombre": "Obtener todas las imágenes",
+    "metodo": "GET",
+    "ruta": "/posts/image",
+    "body": null
+  },
+  {
+    "nombre": "Obtener imagen por ID - Éxito",
+    "metodo": "GET",
+    "ruta": "/posts/image/:id",
+    "body": null
+  },
+  {
+    "nombre": "Obtener imagen por ID - Error 404 (Imagen inexistente)",
+    "metodo": "GET",
+    "ruta": "/posts/image/:id",
+    "body": null
+  },
+  {
+    "nombre": "Crear imagen para post - Éxito",
+    "metodo": "POST",
+    "ruta": "/posts/image",
+    "body": {
+      "url": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809",
+      "postId": 1
+    }
+  },
+  {
+    "nombre": "Crear imagen para post - Error 400 (URL con formato inválido)",
+    "metodo": "POST",
+    "ruta": "/posts/image",
+    "body": {
+      "url": "no-es-una-url",
+      "postId": 1
+    }
+  },
+  {
+    "nombre": "Crear imagen para post - Error 404 (Posteo no encontrado)",
+    "metodo": "POST",
+    "ruta": "/posts/image",
+    "body": {
+      "url": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809",
+      "postId": 999
+    }
+  },
+  {
+    "nombre": "Actualizar imagen (PUT) - Éxito",
+    "metodo": "PUT",
+    "ruta": "/posts/image/:id",
+    "body": {
+      "url": "https://images.unsplash.com/photo-actualizada.jpg",
+      "postId": 1
+    }
+  },
+  {
+    "nombre": "Actualizar imagen (PUT) - Error 404 (Imagen inexistente)",
+    "metodo": "PUT",
+    "ruta": "/posts/image/:id",
+    "body": {
+      "url": "https://images.unsplash.com/photo-actualizada.jpg",
+      "postId": 1
+    }
+  },
+  {
+    "nombre": "Eliminar imagen - Éxito",
+    "metodo": "DELETE",
+    "ruta": "/posts/image/:id",
+    "body": null
+  },
+  {
+    "nombre": "Eliminar imagen - Error 404 (Imagen inexistente)",
+    "metodo": "DELETE",
+    "ruta": "/posts/image/:id",
+    "body": null
+  },
+  {
+    "nombre": "Ruta no encontrada - Error 404",
+    "metodo": "GET",
+    "ruta": "/ruta-inexistente",
+    "body": null
+  }
+]
