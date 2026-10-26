@@ -1,4 +1,6 @@
 const express = require("express");
+const dotenv = require("dotenv");
+dotenv.config();
 const app = express();
 const routerUsuarios = require("./routes/userRoutes");
 const routerPosts = require("./routes/postRoutes");
@@ -14,11 +16,15 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use("/posts/:id/comentarios", routerComentariosPost);
 app.use("/posts/:id/tags", routerTagsPost);
+app.use("/posts/image", routerPostImages);
 app.use("/posts", routerPosts);
-app.use("/posts/:id/image", routerPostImages);
 app.use("/usuarios", routerUsuarios);
 app.use("/comentarios", routerComentarios);
 app.use("/tags", routerTags);
+
+app.use((req, res) => {
+  res.status(404).json({ message: "Ruta no encontrada." });
+});
 
 app.listen(PORT, async () => {
   try {

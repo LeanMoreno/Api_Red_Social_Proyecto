@@ -20,17 +20,18 @@ router.put(
   "/:id",
   validarId,
   buscarUsuarioPorId,
+  validarUsuario,
   userControllers.actualizarUsuario,
 );
 
-router.patch("/:id", 
-validarId,
-buscarUsuarioPorId,
-userControllers.modificarUsuario);
-
-router.delete("/:id", 
+router.patch("/:id",
   validarId,
-buscarUsuarioPorId,
-userControllers.eliminarUsuario);
+  buscarUsuarioPorId,
+  userControllers.modificarUsuario);
+
+router.delete("/:id",
+  validarId,
+  buscarUsuarioPorId,
+  userControllers.eliminarUsuario);
 
 module.exports = router;

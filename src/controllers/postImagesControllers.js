@@ -1,15 +1,32 @@
 const { Post, Post_Images } = require("../models");
-const { post } = require("../routes/postImagesRoutes");
 
 const obtenerPostsImages = async (req, res) => {
-  const posts = await Post.findAll();
-  res.json(posts);
+  try {
+    const imagenes = await Post_Images.findAll({
+      attributes: ["id", "url", "postId", "createdAt"],
+    });
+    res.status(200).json(imagenes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al obtener las imágenes" });
+  }
 };
+
+const obtenerPostImage = async (req, res) => {
+  try {
+    const post_image = req.post_image;
+
+    res.status(200).json(post_image);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al obtener la imagen del post" });
+  }
+}
 
 const crearPostImage = async (req, res) => {
   try {
-    const { postId } = req.params;
-    const { URL, postIdBody } = req.body;
+    // const { postId } = req.params;
+    const { url, postId } = req.body;
     const post = await Post.findByPk(postId);
 
     if (!post) {
@@ -17,44 +34,68 @@ const crearPostImage = async (req, res) => {
     }
 
     const post_image = await Post_Images.create({
-      URL,
-      postIdBody,
+      url,
+      postId,
     });
 
     res.status(201).json(post_image);
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al crear la imagen del post" });
+  }
 };
 
 const actualizarPostImage = async (req, res) => {
-  const post_image = req.post_image;
-  const { URL, postId } = req.body;
+  try {
+    const post_image = req.post_image;
+    const { url, postId } = req.body;
+    const post = await Post.findByPk(postId);
+    if (!post) {
+      return res.status(404).json({ message: "Posteo no encontrado" });
+    }
 
-  await post_image.update({
-    URL,
-    postId,
-  });
+    await post_image.update({
+      url,
+      postId,
+    });
 
-  res.json(post_image);
+    res.status(200).json(post_image);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al actualizar la imagen del post" });
+  }
 };
 
 const modificarPostImage = async (req, res) => {
-  const post_image = req.post_image;
+  try {
+    const post_image = req.post_image;
 
-  await post_image.update(req.body);
+    await post_image.update(req.body);
 
-  res.json(post_image);
+    res.json(post_image);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al modificar la imagen del post" });
+  }
+
 };
 
 const eliminarPostImage = async (req, res) => {
-  await req.post_image.destroy();
+  try {
+    await req.post_image.destroy();
 
-  res.json({
-    message: "Imagen del post eliminado correctamente",
-  });
+    res.status(200).json({
+      message: "Imagen del post eliminada correctamente",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al eliminar la imagen del post" });
+  }
 };
 
 module.exports = {
   obtenerPostsImages,
+  obtenerPostImage,
   crearPostImage,
   actualizarPostImage,
   modificarPostImage,
