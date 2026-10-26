@@ -34,6 +34,15 @@ module.exports = (sequelize, DataTypes) => {
     postId: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    visible: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        const meses = Number(process.env.MONTHS_TO_HIDE_COMMENTS) || 6;
+        const fechaLimite = new Date();
+        fechaLimite.setMonth(fechaLimite.getMonth() - meses);
+        return this.createdAt >= fechaLimite;
+      }
     }
   }, {
     sequelize,

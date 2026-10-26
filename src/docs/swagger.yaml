@@ -1,0 +1,206 @@
+openapi: 3.0.4
+info:
+  title: UnaHur Anti-Social Net API
+  description: Documentación oficial para el TP de la red social.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Servidor de desarrollo local
+tags:
+  - name: Usuarios
+    description: Gestión de usuarios del sistema
+  - name: Posts
+    description: Publicaciones de la red anti-social
+  - name: Comentarios
+    description: Interacciones en los posts
+  - name: Tags
+    description: Etiquetas para categorizar posts
+
+paths:
+  #USUARIOS#
+  /usuarios:
+    get:
+      tags: [Usuarios]
+      summary: Obtiene todos los usuarios
+      responses:
+        '200':
+          description: Lista obtenida exitosamente
+    post:
+      tags: [Usuarios]
+      summary: Crea un nuevo usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+      responses:
+        '201':
+          description: Usuario creado exitosamente
+        '400':
+          description: Error en la validación de Joi
+
+  /usuarios/{id}:
+    get:
+      tags: [Usuarios]
+      summary: Obtiene un usuario por ID
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: Usuario encontrado
+        '404':
+          description: Usuario no encontrado
+    put:
+      tags: [Usuarios]
+      summary: Actualiza un usuario existente
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+      responses:
+        '200':
+          description: Usuario actualizado
+    delete:
+      tags: [Usuarios]
+      summary: Elimina un usuario por ID
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: Usuario eliminado
+
+  #POSTS#
+  /posts:
+    get:
+      tags: [Posts]
+      summary: Obtiene todos los posts
+      responses:
+        '200':
+          description: Lista de posts obtenida
+    post:
+      tags: [Posts]
+      summary: Crea un nuevo post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '201':
+          description: Post creado exitosamente
+          
+  /posts/{id}:
+    get:
+      tags: [Posts]
+      summary: Obtiene un post por ID
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: Post encontrado
+    put:
+      tags: [Posts]
+      summary: Actualiza un post por ID
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          description: Post actualizado
+    delete:
+      tags: [Posts]
+      summary: Elimina un post por ID
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: Post eliminado
+
+  #RUTAS ANIDADAS (Posts -> Comentarios/Tags)#
+  /posts/{id}/comentarios:
+    get:
+      tags: [Comentarios]
+      summary: Obtiene los comentarios de un post específico
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: Comentarios obtenidos
+
+  /posts/{id}/tags/{tagId}:
+    post:
+      tags: [Tags]
+      summary: Asigna un tag a un post
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+        - in: path
+          name: tagId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '201':
+          description: Tag asignado al post
+    delete:
+      tags: [Tags]
+      summary: Quita un tag de un post
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+        - in: path
+          name: tagId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Tag removido del post
+
+components:
+  parameters:
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: ID numérico del recurso
+      schema:
+        type: integer
+        minimum: 1
+        
+  schemas:
+    Usuario:
+      type: object
+      required:
+        - nickName
+      properties:
+        nickName:
+          type: string
+          minLength: 3
+          maxLength: 100
+          example: "Juancito"
+          
+    Post:
+      type: object
+      required:
+        - descripcion
+        - userId
+      properties:
+        descripcion:
+          type: string
+          minLength: 3
+          maxLength: 500
+          example: "Este es mi primer post en la red anti-social."
+        userId:
+          type: integer
+          minimum: 1
+          example: 1

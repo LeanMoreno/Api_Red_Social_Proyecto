@@ -1,9 +1,9 @@
-const { idSchema } = require("../schemas/postSchemas");
+const { idPostSchema } = require("../schemas/postSchemas");
 
 const validarIdPost = (req, res, next) => {
   const { id } = req.params;
   const idNumero = Number(id);
-  const { error } = idSchema.validate(idNumero);
+  const { error } = idPostSchema.validate(idNumero);
 
   if (error) {
     return res

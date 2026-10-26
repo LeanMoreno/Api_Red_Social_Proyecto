@@ -26,8 +26,11 @@ const crearUsuario = async (req, res) => {
 
     res.status(201).json({ message: "Usuario creado con exito", usuario });
   } catch (error) {
+    if (error.name === "SequelizeUniqueConstraintError") {
+      return res.status(409).json({ message: "El nickName ya está en uso" });
+    }
     console.error(error);
-    res.status(500).json({ message: "Error al crer al usuario" });
+    res.status(500).json({ message: "Error al crear el usuario" });
   }
 };
 
@@ -44,9 +47,12 @@ const actualizarUsuario = async (req, res) => {
       .status(200)
       .json({ message: "Usuario actualizado con exito!!!", usuario });
   } catch (error) {
+    if (error.name === "SequelizeUniqueConstraintError") {
+      return res.status(409).json({ message: "El nickName ya esta en uso" });
+    }
     console.error(error);
     res.status(500).json({
-      message: "Error al actualizar el producto",
+      message: "Error al actualizar el usuario",
     });
   }
 };
