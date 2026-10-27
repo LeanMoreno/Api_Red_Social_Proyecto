@@ -577,5 +577,65 @@
     "metodo": "GET",
     "ruta": "/ruta-inexistente",
     "body": null
+  },
+  {
+    "nombre": "Seguir usuario - Éxito",
+    "metodo": "POST",
+    "ruta": "/usuarios/:id/seguir/:targetId",
+    "body": null
+  },
+  {
+    "nombre": "Seguir usuario - Error 400 (Un usuario no puede seguirse a sí mismo)",
+    "metodo": "POST",
+    "ruta": "/usuarios/:id/seguir/:targetId",
+    "body": null
+  },
+  {
+    "nombre": "Seguir usuario - Error 404 (Usuario a seguir no encontrado)",
+    "metodo": "POST",
+    "ruta": "/usuarios/:id/seguir/:targetId",
+    "body": null
+  },
+  {
+    "nombre": "Seguir usuario - Error 409 (Ya sigues a este usuario)",
+    "metodo": "POST",
+    "ruta": "/usuarios/:id/seguir/:targetId",
+    "body": null
+  },
+  {
+    "nombre": "Obtener seguidores de un usuario - Éxito",
+    "metodo": "GET",
+    "ruta": "/usuarios/:id/seguidores",
+    "body": null
+  },
+  {
+    "nombre": "Obtener seguidores de un usuario - Error 404 (Usuario no encontrado)",
+    "metodo": "GET",
+    "ruta": "/usuarios/:id/seguidores",
+    "body": null
+  },
+  {
+    "nombre": "Obtener usuarios seguidos por un usuario - Éxito",
+    "metodo": "GET",
+    "ruta": "/usuarios/:id/seguidos",
+    "body": null
+  },
+  {
+    "nombre": "Obtener usuarios seguidos por un usuario - Error 404 (Usuario no encontrado)",
+    "metodo": "GET",
+    "ruta": "/usuarios/:id/seguidos",
+    "body": null
+  },
+  {
+    "nombre": "Dejar de seguir usuario - Éxito",
+    "metodo": "DELETE",
+    "ruta": "/usuarios/:id/dejar-de-seguir/:targetId",
+    "body": null
+  },
+  {
+    "nombre": "Dejar de seguir usuario - Error 404 (No sigues a este usuario)",
+    "metodo": "DELETE",
+    "ruta": "/usuarios/:id/dejar-de-seguir/:targetId",
+    "body": null
   }
 ]

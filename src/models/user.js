@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+
       User.hasMany(models.Post, {
         foreignKey: 'userId',
         as: 'posts',
@@ -20,6 +21,21 @@ module.exports = (sequelize, DataTypes) => {
         as: 'comentarios',
         onDelete: 'CASCADE'
       });
+      User.belongsToMany(models.User, {
+        as: 'followers',
+        through: models.UserFollower,
+        foreignKey: 'followingId',
+        otherKey: 'followerId',
+        onDelete: 'CASCADE'
+      });
+      User.belongsToMany(models.User, {
+        as: 'following',
+        through: models.UserFollower,
+        foreignKey: 'followerId',
+        otherKey: 'followingId',
+        onDelete: 'CASCADE'
+      });
+
     }
   }
   User.init({
