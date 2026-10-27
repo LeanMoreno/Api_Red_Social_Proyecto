@@ -525,6 +525,28 @@
     }
   },
   {
+    "nombre": "Bonus 1 - Subir imagen al servidor (form-data) - Éxito",
+    "metodo": "POST",
+    "ruta": "/posts/image",
+    "body": {
+      "tipo": "form-data",
+      "descripcion": "Subir archivo binario en campo 'imagen' y 'postId'",
+      "postId": 1,
+      "imagen": "imagen.png"
+    }
+  },
+  {
+    "nombre": "Bonus 1 - Subir imagen al servidor - Error 400 (Formato no permitido)",
+    "metodo": "POST",
+    "ruta": "/posts/image",
+    "body": {
+      "tipo": "form-data",
+      "descripcion": "Subir archivo no soportado (ej. txt o pdf)",
+      "postId": 1,
+      "imagen": "documento.pdf"
+    }
+  },
+  {
     "nombre": "Crear imagen para post - Error 400 (URL con formato inválido)",
     "metodo": "POST",
     "ruta": "/posts/image",

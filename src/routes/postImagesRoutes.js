@@ -4,7 +4,7 @@ const postImagesControllers = require("../controllers/postImagesControllers");
 const validarPostImage = require("../middlewares/validarPostImage");
 const validarIdPostImage = require("../middlewares/validarIdPostImage");
 const buscarPostImagePorId = require("../middlewares/buscarPostImagePorId");
-const uploadPostImage = require("../middlewares/uploadPostImage");
+const uploadPostImages = require("../middlewares/uploadPostImages");
 
 router.get("/", postImagesControllers.obtenerPostsImages);
 
@@ -17,7 +17,8 @@ router.get(
 
 router.post(
   "/",
-  uploadPostImage.single("imagen"),
+  uploadPostImages,
+  validarPostImage,
   postImagesControllers.crearPostImage
 );
 

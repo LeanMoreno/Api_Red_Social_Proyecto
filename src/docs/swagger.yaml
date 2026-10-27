@@ -15,6 +15,8 @@ tags:
     description: Interacciones en los posts
   - name: Tags
     description: Etiquetas para categorizar posts
+  - name: Imágenes
+    description: Gestión de imágenes de las publicaciones
 
 paths:
   #USUARIOS#
@@ -361,6 +363,87 @@ paths:
         '200':
           description: Tag removido del post
 
+
+  #IMÁGENES#
+  /posts/image:
+    get:
+      tags: [Imágenes]
+      summary: Obtiene todas las imágenes de los posts
+      responses:
+        '200':
+          description: Lista de imágenes obtenida exitosamente
+    post:
+      tags: [Imágenes]
+      summary: Registra o sube una imagen para un post
+      description: Permite subir un archivo de imagen al servidor (multipart/form-data) o registrar una URL externa (application/json).
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - postId
+                - imagen
+              properties:
+                postId:
+                  type: integer
+                  example: 1
+                imagen:
+                  type: string
+                  format: binary
+                  description: Archivo de imagen a subir (jpg, jpeg, png, webp, gif)
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostImage'
+      responses:
+        '201':
+          description: Imagen creada exitosamente
+        '400':
+          description: Datos inválidos o archivo no permitido
+        '404':
+          description: Posteo no encontrado
+
+  /posts/image/{id}:
+    get:
+      tags: [Imágenes]
+      summary: Obtiene una imagen por ID
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: Imagen encontrada
+        '404':
+          description: Imagen no encontrada
+    put:
+      tags: [Imágenes]
+      summary: Actualiza una imagen por ID
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostImage'
+      responses:
+        '200':
+          description: Imagen actualizada
+        '400':
+          description: Datos inválidos
+        '404':
+          description: Imagen o posteo no encontrado
+    delete:
+      tags: [Imágenes]
+      summary: Elimina una imagen por ID (y su archivo local si corresponde)
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: Imagen eliminada
+        '404':
+          description: Imagen no encontrada
+
 components:
   parameters:
     PathId:
@@ -398,4 +481,15 @@ components:
         userId:
           type: integer
           minimum: 1
+          example: 1
+    PostImage:
+      type: object
+      required:
+        - postId
+      properties:
+        url:
+          type: string
+          example: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809"
+        postId:
+          type: integer
           example: 1
