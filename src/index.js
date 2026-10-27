@@ -5,7 +5,6 @@ const YAML = require("yamljs");
 const path = require("path");
 
 dotenv.config();
-const app = express();
 
 const routerUsuarios = require("./routes/userRoutes");
 const routerPosts = require("./routes/postRoutes");
@@ -14,6 +13,7 @@ const routerComentariosPost = require("./routes/postCommentRoutes");
 const routerTags = require("./routes/tagRoutes");
 const routerTagsPost = require("./routes/postTagRoutes");
 const routerPostImages = require("./routes/postImagesRoutes");
+
 const db = require("./models");
 
 const PORT = process.env.PORT || 3000;
@@ -31,6 +31,7 @@ app.use("/posts", routerPosts);
 app.use("/usuarios", routerUsuarios);
 app.use("/comentarios", routerComentarios);
 app.use("/tags", routerTags);
+app.use("/uploads",express.static(path.join(process.cwd(), "uploads")));
 
 app.use((req, res) => {
   res.status(404).json({ message: "Ruta no encontrada." });

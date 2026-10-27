@@ -23,25 +23,40 @@ const obtenerPostImage = async (req, res) => {
   }
 }
 
+const { Post_Images } = require("../models");
+
 const crearPostImage = async (req, res) => {
   try {
-    // const { postId } = req.params;
     const { url, postId } = req.body;
-    const post = await Post.findByPk(postId);
 
-    if (!post) {
-      return res.status(404).json({ message: "Posteo no encontrado" });
+    let rutaImagen;
+
+    // Si subió un archivo
+    if (req.file) {
+      rutaImagen = `/uploads/${req.file.filename}`;
+    }
+    // Si envió una URL
+    else if (url) {
+      rutaImagen = url;
+    }
+    // Si no hizo ninguna de las dos
+    else {
+      return res.status(400).json({
+        mensaje: "Debe enviar una imagen o una URL",
+      });
     }
 
-    const post_image = await Post_Images.create({
-      url,
+    const imagen = await Post_Images.create({
+      url: rutaImagen,
       postId,
     });
 
-    res.status(201).json(post_image);
+    res.status(201).json(imagen);
+
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error al crear la imagen del post" });
+    res.status(500).json({
+      mensaje: error.message,
+    });
   }
 };
 
