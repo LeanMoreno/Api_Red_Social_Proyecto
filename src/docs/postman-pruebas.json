@@ -530,9 +530,19 @@
     "ruta": "/posts/image",
     "body": {
       "tipo": "form-data",
-      "descripcion": "Subir archivo binario en campo 'imagen' y 'postId'",
-      "postId": 1,
-      "imagen": "imagen.png"
+      "descripcion": "En Postman ir a Body -> form-data. En Key poner 'imagen' y cambiar el tipo a 'File' (desplegable a la derecha de la key), luego en el campo Value seleccionar la ubicación del archivo de imagen en la PC. En otra fila, Key 'postId' (Text) con el ID del post en Value.",
+      "campos": [
+        {
+          "key": "imagen",
+          "type": "File",
+          "value": "[Ubicación / ruta del archivo de imagen en tu PC, ej. C:\\ruta\\imagen.png]"
+        },
+        {
+          "key": "postId",
+          "type": "Text",
+          "value": "1"
+        }
+      ]
     }
   },
   {
@@ -541,9 +551,19 @@
     "ruta": "/posts/image",
     "body": {
       "tipo": "form-data",
-      "descripcion": "Subir archivo no soportado (ej. txt o pdf)",
-      "postId": 1,
-      "imagen": "documento.pdf"
+      "descripcion": "En Postman ir a Body -> form-data. En Key poner 'imagen' con tipo 'File' y en Value seleccionar un archivo de formato no permitido (ej. txt o pdf). En Key 'postId' (Text) poner el ID del post.",
+      "campos": [
+        {
+          "key": "imagen",
+          "type": "File",
+          "value": "[Ubicación de un archivo no permitido en tu PC, ej. documento.pdf]"
+        },
+        {
+          "key": "postId",
+          "type": "Text",
+          "value": "1"
+        }
+      ]
     }
   },
   {

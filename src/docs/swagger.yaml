@@ -25,7 +25,7 @@ paths:
       tags: [Usuarios]
       summary: Obtiene todos los usuarios
       responses:
-        '200':
+        "200":
           description: Lista obtenida exitosamente
     post:
       tags: [Usuarios]
@@ -35,11 +35,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Usuario'
+              $ref: "#/components/schemas/Usuario"
       responses:
-        '201':
+        "201":
           description: Usuario creado exitosamente
-        '400':
+        "400":
           description: Error en la validación de Joi
 
   /usuarios/{id}:
@@ -47,33 +47,33 @@ paths:
       tags: [Usuarios]
       summary: Obtiene un usuario por ID
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: "#/components/parameters/PathId"
       responses:
-        '200':
+        "200":
           description: Usuario encontrado
-        '404':
+        "404":
           description: Usuario no encontrado
     put:
       tags: [Usuarios]
       summary: Actualiza un usuario existente
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: "#/components/parameters/PathId"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Usuario'
+              $ref: "#/components/schemas/Usuario"
       responses:
-        '200':
+        "200":
           description: Usuario actualizado
     delete:
       tags: [Usuarios]
       summary: Elimina un usuario por ID
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: "#/components/parameters/PathId"
       responses:
-        '200':
+        "200":
           description: Usuario eliminado
 
   /usuarios/{id}/seguir/{targetId}:
@@ -270,14 +270,13 @@ paths:
         500:
           description: Error interno del servidor
 
-
   #POSTS#
   /posts:
     get:
       tags: [Posts]
       summary: Obtiene todos los posts
       responses:
-        '200':
+        "200":
           description: Lista de posts obtenida
     post:
       tags: [Posts]
@@ -287,41 +286,41 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Post'
+              $ref: "#/components/schemas/Post"
       responses:
-        '201':
+        "201":
           description: Post creado exitosamente
-          
+
   /posts/{id}:
     get:
       tags: [Posts]
       summary: Obtiene un post por ID
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: "#/components/parameters/PathId"
       responses:
-        '200':
+        "200":
           description: Post encontrado
     put:
       tags: [Posts]
       summary: Actualiza un post por ID
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: "#/components/parameters/PathId"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Post'
+              $ref: "#/components/schemas/Post"
       responses:
-        '200':
+        "200":
           description: Post actualizado
     delete:
       tags: [Posts]
       summary: Elimina un post por ID
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: "#/components/parameters/PathId"
       responses:
-        '200':
+        "200":
           description: Post eliminado
 
   #RUTAS ANIDADAS (Posts -> Comentarios/Tags)#
@@ -330,9 +329,9 @@ paths:
       tags: [Comentarios]
       summary: Obtiene los comentarios de un post específico
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: "#/components/parameters/PathId"
       responses:
-        '200':
+        "200":
           description: Comentarios obtenidos
 
   /posts/{id}/tags/{tagId}:
@@ -340,29 +339,28 @@ paths:
       tags: [Tags]
       summary: Asigna un tag a un post
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: "#/components/parameters/PathId"
         - in: path
           name: tagId
           required: true
           schema:
             type: integer
       responses:
-        '201':
+        "201":
           description: Tag asignado al post
     delete:
       tags: [Tags]
       summary: Quita un tag de un post
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: "#/components/parameters/PathId"
         - in: path
           name: tagId
           required: true
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: Tag removido del post
-
 
   #IMÁGENES#
   /posts/image:
@@ -370,12 +368,15 @@ paths:
       tags: [Imágenes]
       summary: Obtiene todas las imágenes de los posts
       responses:
-        '200':
+        "200":
           description: Lista de imágenes obtenida exitosamente
     post:
       tags: [Imágenes]
       summary: Registra o sube una imagen para un post
-      description: Permite subir un archivo de imagen al servidor (multipart/form-data) o registrar una URL externa (application/json).
+      description: |
+        Permite registrar una imagen asociada a un post:
+        - **Subida local (Bonus 1 - Postman: form-data)**: En la pestaña Body seleccionar `form-data`. En Key escribir "imagen", cambiar el tipo desplegable de Text a "File", y en el campo Value seleccionar el archivo o ubicación de la imagen en tu PC (formatos permitidos: jpg, jpeg, png, webp, gif). Agregar también la fila con Key "postId" (Text) y el ID del post en Value.
+        - **URL externa (Postman: raw JSON)**: Enviar JSON con los campos `url` y `postId`.
       requestBody:
         required: true
         content:
@@ -388,20 +389,21 @@ paths:
               properties:
                 postId:
                   type: integer
+                  description: ID del post al que pertenece la imagen (tipo Text en form-data)
                   example: 1
                 imagen:
                   type: string
                   format: binary
-                  description: Archivo de imagen a subir (jpg, jpeg, png, webp, gif)
+                  description: En Postman, colocar la palabra 'imagen' en Key, seleccionar tipo 'File' y en el campo Value elegir la ubicación de la imagen en la PC (jpg, jpeg, png, webp, gif)
           application/json:
             schema:
-              $ref: '#/components/schemas/PostImage'
+              $ref: "#/components/schemas/PostImage"
       responses:
-        '201':
+        "201":
           description: Imagen creada exitosamente
-        '400':
+        "400":
           description: Datos inválidos o archivo no permitido
-        '404':
+        "404":
           description: Posteo no encontrado
 
   /posts/image/{id}:
@@ -409,39 +411,39 @@ paths:
       tags: [Imágenes]
       summary: Obtiene una imagen por ID
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: "#/components/parameters/PathId"
       responses:
-        '200':
+        "200":
           description: Imagen encontrada
-        '404':
+        "404":
           description: Imagen no encontrada
     put:
       tags: [Imágenes]
       summary: Actualiza una imagen por ID
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: "#/components/parameters/PathId"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PostImage'
+              $ref: "#/components/schemas/PostImage"
       responses:
-        '200':
+        "200":
           description: Imagen actualizada
-        '400':
+        "400":
           description: Datos inválidos
-        '404':
+        "404":
           description: Imagen o posteo no encontrado
     delete:
       tags: [Imágenes]
       summary: Elimina una imagen por ID (y su archivo local si corresponde)
       parameters:
-        - $ref: '#/components/parameters/PathId'
+        - $ref: "#/components/parameters/PathId"
       responses:
-        '200':
+        "200":
           description: Imagen eliminada
-        '404':
+        "404":
           description: Imagen no encontrada
 
 components:
@@ -454,7 +456,7 @@ components:
       schema:
         type: integer
         minimum: 1
-        
+
   schemas:
     Usuario:
       type: object
@@ -466,7 +468,7 @@ components:
           minLength: 3
           maxLength: 100
           example: "Juancito"
-          
+
     Post:
       type: object
       required:
