@@ -129,7 +129,7 @@ Una vez iniciado el proyecto:
 
 ```bash
 git clone URL_DEL_REPOSITORIO
-cd ejercicio-56-grupo-33
+cd Api_Red_Social_Proyecto
 ```
 
 ### 2. Instalar dependencias
